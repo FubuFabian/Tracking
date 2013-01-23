@@ -1,0 +1,13 @@
+Created by Fabian Torres Robles
+CCADET UNAM, Mexico 
+01/12/12
+
+This program is used to have a vuisual representation of the sirgucal elements
+when a needle biopsy is tacken. It is develop to use a polaris optic tracker.
+I has virtual representation of the Ulrtasound probe, needle and a polaris pointer object.
+
+It is needed to pre-build
+- ITK
+- VTK
+- IGSTK
+- QT

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Scene3DWidget</class>
+ <widget class="QWidget" name="Scene3DWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1285</width>
+    <height>797</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Scene3DWidget</string>
+  </property>
+  <widget class="QWidget" name="Display" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>1121</width>
+     <height>771</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="startTrackingBt">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>70</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Start Tracking</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="quitBt">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>732</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>10</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Config Tracker</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="usProbeX">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>220</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="usProbeY">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>260</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="usProbeZ">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>300</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>195</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>US PRobe Coords</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>340</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Needle Coords</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="needleX">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>360</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="needleZ">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>440</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="needleY">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>400</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="initLoggetBt">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>130</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Init Logger</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>startTrackingBt</sender>
+   <signal>clicked()</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>startTracking()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1171</x>
+     <y>41</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1174</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>quitBt</sender>
+   <signal>clicked()</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>Quit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1179</x>
+     <y>765</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1180</x>
+     <y>620</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>configTracker()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1239</x>
+     <y>44</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1136</x>
+     <y>16</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>initLoggetBt</sender>
+   <signal>clicked()</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>initLogger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1239</x>
+     <y>172</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1261</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>startTracking()</slot>
+  <slot>Quit()</slot>
+  <slot>configTracker()</slot>
+  <slot>initLogger()</slot>
+ </slots>
+</ui>
