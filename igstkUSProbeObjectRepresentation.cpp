@@ -125,10 +125,10 @@ void USProbeObjectRepresentation::CreateActors()
   vtkActor* imageCubeActor = vtkActor::New();
 
   vtkCubeSource* imageCube = vtkCubeSource::New();
-  imageCube->SetCenter(0,-20,20);
-  imageCube->SetXLength(4);
+  imageCube->SetCenter(20,-20,0);
+  imageCube->SetXLength(40);
   imageCube->SetYLength(40);
-  imageCube->SetZLength(40);
+  imageCube->SetZLength(4);
 	
   imageCubeActor->GetProperty()->SetColor(0.5,0.5,0.67);
   imageCubeActor->GetProperty()->SetOpacity(this->GetOpacity());
@@ -145,10 +145,10 @@ void USProbeObjectRepresentation::CreateActors()
   vtkActor* bodyCube1Actor = vtkActor::New();
 
   vtkCubeSource* bodyCube1 = vtkCubeSource::New();
-  bodyCube1->SetCenter(0,2,20);
-  bodyCube1->SetXLength(23);
+  bodyCube1->SetCenter(20,2,0);
+  bodyCube1->SetXLength(56);
   bodyCube1->SetYLength(4);
-  bodyCube1->SetZLength(56);
+  bodyCube1->SetZLength(23);
 	
   bodyCube1Actor->GetProperty()->SetColor(0.4,0.4,0.4);
   bodyCube1Actor->GetProperty()->SetOpacity(this->GetOpacity());
@@ -164,10 +164,10 @@ void USProbeObjectRepresentation::CreateActors()
   vtkActor* bodyCube2Actor = vtkActor::New();
 
   vtkCubeSource* bodyCube2 = vtkCubeSource::New();
-  bodyCube2->SetCenter(0,17,20);
-  bodyCube2->SetXLength(25);
+  bodyCube2->SetCenter(20,17,0);
+  bodyCube2->SetXLength(60);
   bodyCube2->SetYLength(30);
-  bodyCube2->SetZLength(60);
+  bodyCube2->SetZLength(25);
 	
   bodyCube2Actor->GetProperty()->SetColor(0.8,0.8,0.8);
   bodyCube2Actor->GetProperty()->SetOpacity(this->GetOpacity());
@@ -183,10 +183,10 @@ void USProbeObjectRepresentation::CreateActors()
   vtkActor* bodyCube3Actor = vtkActor::New();
 
   vtkCubeSource* bodyCube3 = vtkCubeSource::New();
-  bodyCube3->SetCenter(0,34,20);
-  bodyCube3->SetXLength(23);
+  bodyCube3->SetCenter(20,34,0);
+  bodyCube3->SetXLength(42);
   bodyCube3->SetYLength(4);
-  bodyCube3->SetZLength(42);
+  bodyCube3->SetZLength(23);
 	
   bodyCube3Actor->GetProperty()->SetColor(0.85,0.85,0.85);
   bodyCube3Actor->GetProperty()->SetOpacity(this->GetOpacity());
@@ -202,10 +202,10 @@ void USProbeObjectRepresentation::CreateActors()
   vtkActor* bodyCube4Actor = vtkActor::New();
 
   vtkCubeSource* bodyCube4 = vtkCubeSource::New();
-  bodyCube4->SetCenter(0,60,20);
-  bodyCube4->SetXLength(20);
+  bodyCube4->SetCenter(20,60,0);
+  bodyCube4->SetXLength(34);
   bodyCube4->SetYLength(52);
-  bodyCube4->SetZLength(34);
+  bodyCube4->SetZLength(20);
 	
   bodyCube4Actor->GetProperty()->SetColor(0.9,0.9,0.9);
   bodyCube4Actor->GetProperty()->SetOpacity(this->GetOpacity());
@@ -221,12 +221,14 @@ void USProbeObjectRepresentation::CreateActors()
   vtkActor* bodyCylinder1Actor = vtkActor::New();
 
   vtkCylinderSource* bodyCylinder1 = vtkCylinderSource::New();
-  bodyCylinder1->SetCenter(0,89,20);
+  bodyCylinder1->SetCenter(20,89,0);
   bodyCylinder1->SetHeight(6);
   bodyCylinder1->SetRadius(10);
 
   bodyCylinder1Actor->GetProperty()->SetColor(0.2,0.388,0.592);
   bodyCylinder1Actor->GetProperty()->SetOpacity(this->GetOpacity());
+  //bodyCylinder1Actor->SetOrigin(20,-89,0);
+  //bodyCylinder1Actor->SetOrientation(0,0,0);
 
   bodyCylinder1Mapper->SetInputConnection(bodyCylinder1->GetOutputPort());
   bodyCylinder1Actor->SetMapper( bodyCylinder1Mapper );
@@ -239,12 +241,14 @@ void USProbeObjectRepresentation::CreateActors()
   vtkActor* bodyCylinder2Actor = vtkActor::New();
 
   vtkCylinderSource* bodyCylinder2 = vtkCylinderSource::New();
-  bodyCylinder2->SetCenter(0,104.5,20);
+  bodyCylinder2->SetCenter(20,104.5,0);
   bodyCylinder2->SetHeight(25);
   bodyCylinder2->SetRadius(7.5);
 
   bodyCylinder2Actor->GetProperty()->SetColor(0.9,0.9,0.9);
   bodyCylinder2Actor->GetProperty()->SetOpacity(this->GetOpacity());
+  //bodyCylinder2Actor->SetOrigin(20,0,104.5);
+  //bodyCylinder2Actor->SetOrientation(90,0,0);
 
   bodyCylinder2Mapper->SetInputConnection(bodyCylinder2->GetOutputPort());
   bodyCylinder2Actor->SetMapper( bodyCylinder2Mapper );

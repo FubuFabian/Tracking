@@ -71,6 +71,8 @@ private slots:
 	/** \brief Init the tracker logger*/
 	void initLogger();
 
+	/** \brief Open ultrasound volume*/
+	void openVolume();
 };
 
 #endif // SCENE3DWIDGET_H

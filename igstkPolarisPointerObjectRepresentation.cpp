@@ -125,13 +125,14 @@ void PolarisPointerObjectRepresentation::CreateActors()
 	vtkActor* tipConeActor = vtkActor::New();
 
 	vtkConeSource* tipCone = vtkConeSource::New();
-	tipCone->SetCenter(0,2,0);
+	tipCone->SetCenter(0,0,2);
 	tipCone->SetHeight(4);
 	tipCone->SetRadius(1.5);
-	tipCone->SetDirection(0,-1,0);
+	tipCone->SetDirection(0,0,-1);
 
 	tipConeActor->GetProperty()->SetColor(0.8,0.8,0.8);
 	tipConeActor->GetProperty()->SetOpacity(this->GetOpacity());
+	tipConeActor->SetOrigin(0,0,0);
 
 
 	tipConeMapper->SetInputConnection(tipCone->GetOutputPort());
@@ -145,13 +146,14 @@ void PolarisPointerObjectRepresentation::CreateActors()
 	vtkActor* tipCylinderActor = vtkActor::New();
 
 	vtkCylinderSource* tipCylinder = vtkCylinderSource::New();
-	tipCylinder->SetCenter(0,73,0);
+	tipCylinder->SetCenter(0,0,73);
 	tipCylinder->SetHeight(138);
 	tipCylinder->SetRadius(1.5);
 
 	tipCylinderActor->GetProperty()->SetColor(0.8,0.8,0.8);
 	tipCylinderActor->GetProperty()->SetOpacity(this->GetOpacity());
-	tipCylinderActor->SetOrigin(0,73,0);
+	tipCylinderActor->SetOrigin(0,0,73);
+	tipCylinderActor->SetOrientation(90,0,0);
 
 	tipCylinderMapper->SetInputConnection(tipCylinder->GetOutputPort());
 	tipCylinderActor->SetMapper(tipCylinderMapper);
@@ -165,10 +167,10 @@ void PolarisPointerObjectRepresentation::CreateActors()
     vtkActor* bodyCube1Actor = vtkActor::New();
 
     vtkCubeSource* bodyCube1 = vtkCubeSource::New();
-    bodyCube1->SetCenter(0,199.5,0);
-    bodyCube1->SetYLength(115);
+    bodyCube1->SetCenter(0,0,199.5);
+    bodyCube1->SetYLength(6);
     bodyCube1->SetXLength(9);
-    bodyCube1->SetZLength(6);
+    bodyCube1->SetZLength(115);
 
     bodyCube1Actor->GetProperty()->SetColor(0.0,0.0,0.0);
     bodyCube1Actor->GetProperty()->SetOpacity(this->GetOpacity());
@@ -184,15 +186,15 @@ void PolarisPointerObjectRepresentation::CreateActors()
     vtkActor* bodyCube2Actor = vtkActor::New();
 
     vtkCubeSource* bodyCube2 = vtkCubeSource::New();
-    bodyCube2->SetCenter(-15,277.98,0);
-    bodyCube2->SetYLength(60);
+    bodyCube2->SetCenter(15,0,277.98);
+    bodyCube2->SetYLength(6);
     bodyCube2->SetXLength(9);
-    bodyCube2->SetZLength(6);
+    bodyCube2->SetZLength(60);
 
     bodyCube2Actor->GetProperty()->SetColor(0.0,0.0,0.0);
     bodyCube2Actor->GetProperty()->SetOpacity(this->GetOpacity());
-	bodyCube2Actor->SetOrigin(-15,277.98,0);
-	bodyCube2Actor->SetOrientation(0,0,30);
+	bodyCube2Actor->SetOrigin(15,0,277.98);
+	bodyCube2Actor->SetOrientation(0,30,0);
 
     bodyCube2Mapper->SetInputConnection(bodyCube2->GetOutputPort());
     bodyCube2Actor->SetMapper( bodyCube2Mapper );
@@ -205,15 +207,15 @@ void PolarisPointerObjectRepresentation::CreateActors()
     vtkActor* bodyCube3Actor = vtkActor::New();
 
     vtkCubeSource* bodyCube3 = vtkCubeSource::New();
-    bodyCube3->SetCenter(10.6,262.6,0);
-    bodyCube3->SetYLength(30);
+    bodyCube3->SetCenter(-10.6,0,262.6);
+    bodyCube3->SetYLength(6);
     bodyCube3->SetXLength(9);
-    bodyCube3->SetZLength(6);
+    bodyCube3->SetZLength(30);
 
     bodyCube3Actor->GetProperty()->SetColor(0.0,0.0,0.0);
     bodyCube3Actor->GetProperty()->SetOpacity(this->GetOpacity());
-	bodyCube3Actor->SetOrigin(10.6,262.6,0);
-	bodyCube3Actor->SetOrientation(0,0,-45);
+	bodyCube3Actor->SetOrigin(-10.6,0,262.6);
+	bodyCube3Actor->SetOrientation(0,-45,0);
 
     bodyCube3Mapper->SetInputConnection(bodyCube3->GetOutputPort());
     bodyCube3Actor->SetMapper( bodyCube3Mapper );

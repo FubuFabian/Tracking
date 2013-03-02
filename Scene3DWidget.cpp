@@ -80,6 +80,16 @@ void Scene3DWidget::configTracker()
 	ui->startTrackingBt->setEnabled(true);
 }
 
+void Scene3DWidget::openVolume()
+{
+	QString qtVolumeFilename = QFileDialog::getOpenFileName(this, tr("Open Volume"),
+        QDir::currentPath(),tr("MHD Files (*.mhd)"));
+	std::string volumeFilename = std::string(qtVolumeFilename.toAscii().data());
+
+	scene3D->addVolumeToScene(volumeFilename);
+
+}
+
 void Scene3DWidget::initLogger()
 {
 	scene3D->initLogger();

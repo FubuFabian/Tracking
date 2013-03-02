@@ -195,7 +195,7 @@ void NeedleObjectRepresentation::CreateActors()
     vtkActor* bodyCubeActor = vtkActor::New();
 
 	vtkCubeSource* bodyCube = vtkCubeSource::New();
-	bodyCube->SetCenter(0,141,0);
+	bodyCube->SetCenter(0,142,0);
 	bodyCube->SetYLength(2);
 	bodyCube->SetXLength(32);
 	bodyCube->SetZLength(18);

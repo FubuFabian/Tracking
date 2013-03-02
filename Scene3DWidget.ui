@@ -196,6 +196,19 @@
     <string>Init Logger</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="openVolumeBtn">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>490</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Open Volume</string>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
@@ -264,11 +277,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>openVolumeBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>openVolume()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1210</x>
+     <y>525</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1208</x>
+     <y>591</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>startTracking()</slot>
   <slot>Quit()</slot>
   <slot>configTracker()</slot>
   <slot>initLogger()</slot>
+  <slot>openVolume()</slot>
  </slots>
 </ui>

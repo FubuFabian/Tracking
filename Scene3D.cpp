@@ -11,6 +11,17 @@
 #include "igstkLogger.h"
 #include "itkStdStreamLogOutput.h"
 
+#include "vtkSmartPointer.h"
+#include "vtkMetaImageReader.h"
+#include "vtkImageData.h"
+#include "vtkImageChangeInformation.h"
+
+#include "igstkAxesObjectRepresentation.h"
+#include "igstkUSProbeObjectRepresentation.h"
+#include "igstkNeedleObjectRepresentation.h"
+#include "igstkPolarisPointerObjectRepresentation.h"
+#include "igstkImageSpatialObjectVolumeRepresentation.h"
+
 
 void Scene3D::configTracker(std::string referenceToolFilename, std::string ultrasoundProbeFilename, 
 							std::string needleFilename, std::string pointerFilename, QString probeCalibrationFilename)
@@ -83,34 +94,49 @@ void Scene3D::configTracker(std::string referenceToolFilename, std::string ultra
 		 std::cout<<"No Probe Calibration Data Loaded"<<std::endl;
 	}
 
-	igstk::Transform probeCalibrationTransform;
-
-	igstk::Transform::VectorType probeCalibrationTranslation;
-	probeCalibrationTranslation[0] = probeCalibrationData[0];
-	probeCalibrationTranslation[1] = probeCalibrationData[1];
-	probeCalibrationTranslation[2] = probeCalibrationData[2];
-
-	igstk::Transform::VersorType probeCalibrationRotation;
-	probeCalibrationRotation.Set(probeCalibrationData[3], probeCalibrationData[4], probeCalibrationData[5], 0.0);
-
 	igstk::Transform::ErrorType errorValue;
 	errorValue=10;
 
 	double validityTimeInMilliseconds;
 	validityTimeInMilliseconds = igstk::TimeStamp::GetLongestPossibleTime();
 
-	probeCalibrationTransform.SetTranslationAndRotation(probeCalibrationTranslation, probeCalibrationRotation, errorValue, validityTimeInMilliseconds);
+	igstk::Transform::VectorType probeTranslation;
+	igstk::Transform probeTransform;
+	igstk::Transform::VersorType probeRotation;
 
+	probeTranslation[0] = probeCalibrationData[0];
+	probeTranslation[1] = probeCalibrationData[1];
+	probeTranslation[2] = probeCalibrationData[2];
+    probeRotation.Set(probeCalibrationData[3], probeCalibrationData[4], probeCalibrationData[5], 0.0);
+	probeTransform.SetTranslationAndRotation(probeTranslation, probeRotation, errorValue, validityTimeInMilliseconds);
 
-	identityTransform.SetToIdentity(
-                      igstk::TimeStamp::GetLongestPossibleTime());
+	igstk::Transform::VectorType needleTranslation;
+	igstk::Transform::VersorType needleRotation;
+	igstk::Transform needleTransform;
 
+	needleTranslation[0] = -22.644;
+	needleTranslation[1] = -84.378;
+	needleTranslation[2] = -66.223;
+	needleRotation.Set(0.0, 0.0, 0.0, 1.0 );
+	needleTransform.SetTranslationAndRotation(needleTranslation, needleRotation, errorValue, validityTimeInMilliseconds );
+
+	igstk::Transform::VectorType pointerTranslation;
+	igstk::Transform::VersorType pointerRotation;
+	igstk::Transform pointerTransform;
+
+	pointerTranslation[0] = -20.049;
+	pointerTranslation[1] = 2.026;
+	pointerTranslation[2] = -155.295;
+	pointerRotation.Set(0.0, 0.0, 0.0, 1.0 );
+	pointerTransform.SetTranslationAndRotation(pointerTranslation, pointerRotation, errorValue, validityTimeInMilliseconds);
+
+	identityTransform.SetToIdentity(igstk::TimeStamp::GetLongestPossibleTime());
 
 
 	referenceAxes->RequestSetTransformAndParent(identityTransform, referenceTool);
-	usProbe->RequestSetTransformAndParent(identityTransform, ultrasoundProbeTool);
-	needle->RequestSetTransformAndParent(identityTransform, needleTool);
-	pointer->RequestSetTransformAndParent(identityTransform, pointerTool);
+	usProbe->RequestSetTransformAndParent(probeTransform, ultrasoundProbeTool);
+	needle->RequestSetTransformAndParent(needleTransform, needleTool);
+	pointer->RequestSetTransformAndParent(pointerTransform, pointerTool);
 
 	scene3DWidget->SetTracker(tracker);
 
@@ -156,7 +182,8 @@ void Scene3D::startTracking()
 			coordSystemAObserverNeedle->Clear();
 			needleTool->RequestGetTransformToParent();
 			coordSystemAObserverPointer->Clear();
-			pointer->RequestGetTransformToParent();
+			pointerTool->RequestGetTransformToParent();
+
 
 			if (coordSystemAObserverReferenceTool->GotTransform())
 			{
@@ -224,9 +251,10 @@ void Scene3D::init3DScene()
 	usProbe = igstk::USProbeObject::New();
     needle = igstk::NeedleObject::New();
 	pointer = igstk::PolarisPointerObject::New();
+	usVolume = igstk::USImageObject::New();
 
     referenceAxes->SetSize(100,100,100);
-
+	
 	igstk::AxesObjectRepresentation::Pointer referenceAxesRepresentation =
 		igstk::AxesObjectRepresentation::New();
 	referenceAxesRepresentation->RequestSetAxesObject(referenceAxes);
@@ -243,6 +271,7 @@ void Scene3D::init3DScene()
 		igstk::PolarisPointerObjectRepresentation::New();
 	pointerRepresentation->RequestSetPolarisPointerObject(pointer);
 
+
 	scene3DWidget->View->RequestAddObject(referenceAxesRepresentation);
 	scene3DWidget->View->RequestAddObject(usProbeRepresentation);
 	scene3DWidget->View->RequestAddObject(needleRepresentation);
@@ -255,3 +284,42 @@ void Scene3D::init3DScene()
 	configTrackerFlag = false;
 }
 
+void Scene3D::addVolumeToScene(std::string volumeFilename)
+{
+	vtkSmartPointer<vtkMetaImageReader> reader = vtkSmartPointer<vtkMetaImageReader>::New();
+	reader->SetFileName(volumeFilename.c_str());
+    reader->Update();
+
+	vtkSmartPointer<vtkImageData> volumeData = reader->GetOutput();
+	double * usVolumePosition = volumeData->GetOrigin();
+
+	vtkSmartPointer<vtkImageChangeInformation> changeInformation = vtkSmartPointer<vtkImageChangeInformation>::New();
+	changeInformation->SetInput(volumeData);
+	changeInformation->SetOutputOrigin(0,0,0);
+	changeInformation->Update();
+	usVolume->volumeData =  volumeData;
+
+	igstk::ImageSpatialObjectVolumeRepresentation<igstk::USImageObject>::Pointer usVolumeRepresentation =
+		igstk::ImageSpatialObjectVolumeRepresentation<igstk::USImageObject>::New();
+	usVolumeRepresentation->RequestSetImageSpatialObject(usVolume);
+
+	igstk::Transform::VectorType usVolumeTranslation;
+	igstk::Transform::VersorType usVolumeRotation;
+	igstk::Transform usVolumeTransform;
+
+	igstk::Transform::ErrorType errorValue;
+	errorValue=10;
+
+	double validityTimeInMilliseconds;
+	validityTimeInMilliseconds = igstk::TimeStamp::GetLongestPossibleTime();
+	std::cout<<usVolumePosition[0]<<","<<usVolumePosition[1]<<","<<usVolumePosition[2]<<std::endl;
+	usVolumeTranslation[0] = usVolumePosition[0];
+	usVolumeTranslation[1] = usVolumePosition[1];
+	usVolumeTranslation[2] = usVolumePosition[2];
+	usVolumeRotation.Set(0.0, 0.0, 0.0, 1.0 );
+	usVolumeTransform.SetTranslationAndRotation(usVolumeTranslation, usVolumeRotation, errorValue, validityTimeInMilliseconds);
+
+	scene3DWidget->View->RequestAddObject(usVolumeRepresentation);
+	usVolume->RequestSetTransformAndParent(usVolumeTransform, referenceTool);
+
+}

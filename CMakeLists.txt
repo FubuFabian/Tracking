@@ -54,7 +54,8 @@ SET(AppSrcs main.cpp mainwindow.cpp QVTKImageWidget.cpp QVTKImageWidgetCommand.c
     igstkUSProbeObject.cpp igstkUSProbeObjectRepresentation.cpp
     igstkPolarisPointerObject.cpp igstkPolarisPointerObjectRepresentation.cpp
     CheckCalibrationErrorWidget.cpp vtkTracerInteractorStyle.cpp
-    EstimateSphereFromPoints.cpp SphereFunction.cpp)
+    EstimateSphereFromPoints.cpp SphereFunction.cpp igstkUSImageObject.cpp 
+    igstkImageSpatialObjectVolumeRepresentation.txx)
     
 SET(AppHeaders mainwindow.h QVTKImageWidget.h QVTKImageWidgetCommand.h 
     ProbeCalibrationWidget.h Calibration.h VolumeReconstructionWidget.h
@@ -63,7 +64,8 @@ SET(AppHeaders mainwindow.h QVTKImageWidget.h QVTKImageWidgetCommand.h
     igstkUSProbeObject.h igstkUSProbeObjectRepresentation.h
     igstkPolarisPointerObject.h igstkPolarisPointerObjectRepresentation.h
     CheckCalibrationErrorWidget.h vtkTracerInteractorStyle.h
-    EstimateSphereFromPoints.h SphereFunction.h)
+    EstimateSphereFromPoints.h SphereFunction.h igstkUSImageObject.h 
+    igstkImageSpatialObjectVolumeRepresentation.h)
     
 SET(AppUI mainwindow.ui ProbeCalibrationWidget.ui VolumeReconstructionWidget.ui 
     CropImagesWidget.ui Scene3DWidget.ui CheckCalibrationErrorWidget.ui)

@@ -12,11 +12,7 @@
 #include "igstkUSProbeObject.h"
 #include "igstkNeedleObject.h"
 #include "igstkPolarisPointerObject.h"
-
-#include "igstkAxesObjectRepresentation.h"
-#include "igstkUSProbeObjectRepresentation.h"
-#include "igstkNeedleObjectRepresentation.h"
-#include "igstkPolarisPointerObjectRepresentation.h"
+#include "igstkUSImageObject.h"
 
 #include "Scene3DWidget.h"
 
@@ -54,6 +50,9 @@ public:
 	/** \brief Initialize the tracker logger*/
 	void initLogger();
 
+	/** \brief Add an ultrasound volume to the scene*/
+	void addVolumeToScene(std::string);
+
 private:
 
 	bool configTrackerFlag; ///<Indicates of the tracker is configure
@@ -63,6 +62,7 @@ private:
 	igstk::USProbeObject::Pointer usProbe; ///<Ultrasound Probe object
     igstk::NeedleObject::Pointer needle; ///<Biopsy needle object
 	igstk::PolarisPointerObject::Pointer pointer; ///<Polaris pointer object
+	igstk::USImageObject::Pointer usVolume; ///<Ultrasound volume object
 
 	TrackerToolType::Pointer referenceTool; ///<Tool for the reference axes
 	TrackerToolType::Pointer ultrasoundProbeTool; ///<Tool to track the us probe
